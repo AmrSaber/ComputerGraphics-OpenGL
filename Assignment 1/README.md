@@ -22,8 +22,8 @@ Consider a polygon with n sides ...
 4) Translate every point with the value of the origin of the inner center given before and you get the polygon where you want it.  
 
 #### Screen shot of sliced polygons:  
-![sliced images here](https://imgur.com/mD3245V)
+![sliced images here](https://i.imgur.com/mD3245V.png)
 
 #### Screen shot of the final result:
-![final polygons here](https://imgur.com/x2A47Mj)
+![final polygons here](https://i.imgur.com/x2A47Mj.png)
 
