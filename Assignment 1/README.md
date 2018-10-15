@@ -3,7 +3,7 @@
 draw as much as you can from (5-gon, 6-gon, 7-gon, ..., 10-gon)
 
 ### Solution
-Instead of hard-coding the verices of each polygon, I made a generic function that takes certain "information" about the polygon and draws it.  
+Instead of hard-coding the vertices of each polygon, I made a generic function that takes certain "information" about the polygon and draws it.  
 
 These pieces "information" are:  
 - The number of sides of the polygon  

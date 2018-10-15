@@ -4,3 +4,6 @@ I will put screen shots of the finished assignments below so you have an idea of
 
 ### Assignment 1
 ![assignment 1 - polygons](https://i.imgur.com/x2A47Mj.png)
+
+### Assignment 2
+![assignment 2 - solids of revolution](https://i.imgur.com/nzTQI6I.gifv)
