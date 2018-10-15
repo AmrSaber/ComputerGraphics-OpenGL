@@ -18,7 +18,7 @@ When the shape was plotted for the first time, we had a problem with showing tha
 Last but not least we added the functionality for the user to change the angle and the position of the camera with respect to the plot for a better viewing of the formed shape. (we may improve this part later)
 
 #### GIF Of The Program Execution
-![Execution GIF](https://i.imgur.com/nzTQI6I.gifv)
+![Execution GIF](https://i.imgur.com/nzTQI6I.gif)
 
 #### Note
 We may return to this project later to add some features like watching the shape forming and to provide some better control over the camera and the graph.
