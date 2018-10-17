@@ -1,25 +1,25 @@
 float Term::evalTrig(float x){
-			// unity function
-			if (function == "x") return x;
-			
-			// trig functions
-			if (function == "sin") return sin(x);
-			if (function == "cos") return cos(x);
-			if (function == "tan") return tan(x);
-			if (function == "asin") return asin(x);
-			if (function == "acos") return acos(x);
-			if (function == "atan") return atan(x);
-			
-			// hyper-trig functions
-			if (function == "sinh") return sinh(x);
-			if (function == "cosh") return cosh(x);
-			if (function == "tanh") return tanh(x);
-			if (function == "asinh") return asinh(x);
-			if (function == "acosh") return acosh(x);
-			if (function == "atanh") return atanh(x);
-			
-			return 1;
-		}
+	// unity function
+	if (function == "x") return x;
+	
+	// trig functions
+	if (function == "sin") return sin(x);
+	if (function == "cos") return cos(x);
+	if (function == "tan") return tan(x);
+	if (function == "asin") return asin(x);
+	if (function == "acos") return acos(x);
+	if (function == "atan") return atan(x);
+	
+	// hyper-trig functions
+	if (function == "sinh") return sinh(x);
+	if (function == "cosh") return cosh(x);
+	if (function == "tanh") return tanh(x);
+	if (function == "asinh") return asinh(x);
+	if (function == "acosh") return acosh(x);
+	if (function == "atanh") return atanh(x);
+	
+	return 1;
+}
 
 float Term::eval(float x) {
 	//printf("c: %d, exp: %d, f:%s, val: %f\n", coef, exp, function.c_str(), coef * pow(evalTrig(x), exp));
@@ -28,7 +28,7 @@ float Term::eval(float x) {
 }
 
 void Term::print() {
-	printf("coef: %d, power: %d, function: %s\n", coef, exp, function.c_str());
+	printf("coef: %f, power: %f, function: %s\n", coef, exp, function.c_str());
 }
 
 // =================================[Exp functions]===========================
@@ -43,7 +43,8 @@ float Exp::eval(float x) {
 	return y;
 }
 
-int Exp::string2number(string str){
+float Exp::string2number(string str){
+	/*
 	int num = 0;
 	int place = 1;
 	reverse(str.begin(), str.end());
@@ -52,6 +53,11 @@ int Exp::string2number(string str){
 		place *= 10;
 	}
 	return num;
+	*/
+	stringstream ss(str);
+	float res;
+	ss >> res;
+	return res;
 }
 
 void Exp::print() {
@@ -83,10 +89,10 @@ void Exp::parse(string expression) {
 			
 			case 1:
 				num = "";
-				if (!isdigit(c)) {
+				if (!isdigit(c) && c != '-') {
 					--i;
 				} else {
-					while(isdigit(expression[i])){
+					while(isdigit(expression[i]) || expression[i] == '.' || expression[i] == '-'){
 						num += expression[i];
 						++i;
 					}
@@ -130,9 +136,9 @@ void Exp::parse(string expression) {
 				break;
 				
 			case 4:
-				if (!isdigit(c)) throw errorMsg;
+				if (!isdigit(c) && c != '-') throw errorMsg;
 				num = "";
-				while(isdigit(expression[i])){
+				while(isdigit(expression[i]) || expression[i] == '.' || expression[i] == '-'){
 					num += expression[i];
 					++i;
 				}

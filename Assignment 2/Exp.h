@@ -4,13 +4,14 @@
 #include <math.h>
 #include <vector>
 #include <algorithm>
+#include <sstream>
 
 using namespace std;
 
 struct Term{	
 	public:
-		int exp = 1;
-		int coef = 1;
+		float exp = 1;
+		float coef = 1;
 		string function = "";
 		
 		float evalTrig(float x);
@@ -22,7 +23,7 @@ class Exp{
 
 	private:		
 		vector<Term> terms;		
-		int string2number(string str);
+		float string2number(string str);
 	
 	public:
 		void parse(string);
