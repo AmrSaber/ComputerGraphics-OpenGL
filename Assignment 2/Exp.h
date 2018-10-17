@@ -10,7 +10,7 @@ using namespace std;
 
 struct Term{	
 	public:
-		float exp = 1;
+		float exponent = 1;
 		float coef = 1;
 		string function = "";
 		

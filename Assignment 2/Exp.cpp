@@ -18,17 +18,19 @@ float Term::evalTrig(float x){
 	if (function == "acosh") return acosh(x);
 	if (function == "atanh") return atanh(x);
 	
+	if (function == "exp") return exp(x);
+	
 	return 1;
 }
 
 float Term::eval(float x) {
 	//printf("c: %d, exp: %d, f:%s, val: %f\n", coef, exp, function.c_str(), coef * pow(evalTrig(x), exp));
-	if (exp == 0) return coef;
-	return coef * pow(evalTrig(x), exp);
+	if (exponent == 0) return coef;
+	return coef * pow(evalTrig(x), exponent);
 }
 
 void Term::print() {
-	printf("coef: %f, power: %f, function: %s\n", coef, exp, function.c_str());
+	printf("coef: %f, power: %f, function: %s\n", coef, exponent, function.c_str());
 }
 
 // =================================[Exp functions]===========================
@@ -143,7 +145,7 @@ void Exp::parse(string expression) {
 					++i;
 				}
 				--i;
-				term->exp = string2number(num);
+				term->exponent = string2number(num);
 				
 				terms.push_back(*term);
 				term = new Term();
@@ -154,10 +156,10 @@ void Exp::parse(string expression) {
 	
 	if (stage == 2) {
 		term->function = "x";
-		term->exp = 0;
+		term->exponent = 0;
 		terms.push_back(*term);
 	} else if (stage == 3) {
-		term->exp = 1;
+		term->exponent = 1;
 		terms.push_back(*term);
 	} else {
 		delete term;

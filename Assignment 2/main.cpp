@@ -17,10 +17,10 @@ void printText();
 void initRendering();
 void handleResize(int, int);
 void handleKeypress(unsigned char, int, int);
-void renderbitmap(float x, float y, float z, void *font, char *string);
+void renderbitmap(float x, float y, float z, void *font, string s);
 
 // control variables
-const float rotationDelta = 1.5;
+const float rotationDelta = 1;
 const float yShift = 0.01;
 const float updateDelay = 50;
 bool controlRotateRight = 0, controlRotateLeft = 0;
@@ -31,7 +31,6 @@ string input;
 
 
 int main(int argc, char** argv) {
-
 	
 	printf("Valid expressions are polynomials and trig functions with (x) inside of them..\n");
 	printf("Enter an expression to draw:\n");
@@ -127,6 +126,20 @@ void handleKeypress(unsigned char key, int x, int y) {
 	case 27: //Escape key
 		exit(0);
 		break;
+	case 'a':
+		if (controlRotateRight) controlRotateRight = 0;
+		else controlRotateLeft = 1;
+		break;
+	case 'd':
+		if (controlRotateLeft) controlRotateLeft = 0;
+		else controlRotateRight = 1;
+		break;
+	case 'w':
+		controlYDistance += yShift;
+		break;
+	case 's':
+		controlYDistance -= yShift;
+		break;
 	}
 	
 }
@@ -146,8 +159,10 @@ void drawScene() {
 
 	glTranslatef(0, controlYDistance, 0);
 
-	glRotatef(controlRotationAngle, 0, 1, 0);
-	controlRotationAngle += rotationDelta;
+	glRotatef(controlRotationAngle, rotateAboutY, rotateAboutX, 0);
+	if (controlRotateRight) controlRotationAngle += rotationDelta;
+	else if (controlRotateLeft) controlRotationAngle -= rotationDelta;
+	
 	if (abs(controlRotationAngle) > 360) controlRotationAngle = 0;
 
 	drawAxis();
@@ -160,7 +175,7 @@ void drawScene() {
 
 void drawCurve() {
 
-	for (float angle = 0; angle < 360; angle += 0.1) {
+	for (float angle = 0; angle < 360; angle += 0.15) {
 
 		float scaleFactor = 0.1;
 
@@ -172,7 +187,7 @@ void drawCurve() {
 		
 		glBegin(GL_LINE_STRIP);
 
-		for (float x = -15; x <= 15; x += 0.1) {
+		for (float x = -15; x <= 15; x += 0.5) {
 			float y = expression.eval(x);
 			if (abs(y) > 10) continue;
 			glNormal3f(x, y , 1.0f); 
@@ -222,7 +237,7 @@ void renderbitmap(float x, float y, float z, void *font, string s) {
 }
 
 void printText() {
-	/*
+	
 	glColor3f(0.4f, 0.0f, 0.7f);
 	renderbitmap(0, 1.5, 0.035, GLUT_BITMAP_TIMES_ROMAN_24, input );
 	glColor3f(0.4f, 0.4f, 0.4f);
@@ -232,5 +247,5 @@ void printText() {
 	renderbitmap(0, -3.5, 0.15, GLUT_BITMAP_TIMES_ROMAN_24, "-Y");
 	renderbitmap(0, 0.035, 3, GLUT_BITMAP_TIMES_ROMAN_24, "Z");
 	renderbitmap(0, 0, -12, GLUT_BITMAP_TIMES_ROMAN_24, "-Z");
-	*/
+	
 }
