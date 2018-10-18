@@ -95,7 +95,7 @@ void initLight() {
 
 	//Add positioned light
 	GLfloat lightPos0[] = { -3.0f, 3.0f, 5.0f, 1.0f }; 
-	GLfloat lightColor0[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+	GLfloat lightColor0[] = { 0.5f, 0.5f, 1.0f, 1.0f };
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
 	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0); 
 

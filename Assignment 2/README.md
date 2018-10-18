@@ -14,11 +14,11 @@ We then used this expression parser to feed the functions into the plotter-part 
 
 ### Second Of All
 We plot the function provided by the parser and repeat it several times (about 3600) with different rotation each time to show the final __Solid__ shape.  
-When the shape was plotted for the first time, we had a problem with showing that it's actually a 3D shape, so we went with some simple **Ambient Light** to show the depth and curvature of the shape. (this part is alot easier said than done, really!)  
-Last but not least we added the functionality for the user to change the angle and the position of the camera with respect to the plot for a better viewing of the formed shape. (we may improve this part later)
+When the shape was plotted for the first time, we had a problem with showing that it's actually a 3D shape, so we put all sorts of lights (ambient, directional and specular) to show the depth and curvature of the shape. (this part is alot easier said than done, really!)  
+Last but not least we added the functionality for the user to change the angle and the position of the camera with respect to the plot for a better viewing of the formed shape, the user can move up and down with `W` and `S`, they can also rotate the graph with `A` and `D`.
 
 #### GIF Of The Program Execution
-![Execution GIF](https://i.imgur.com/nzTQI6I.gif)
+![Execution GIF](https://i.imgur.com/ypcltRp.gif)
 
 #### Note
-We may return to this project later to add some features like watching the shape forming and to provide some better control over the camera and the graph.
+We may return to this project later to add watching the solid form.
