@@ -18,7 +18,7 @@ When the shape was plotted for the first time, we had a problem with showing tha
 Last but not least we added the functionality for the user to change the angle and the position of the camera with respect to the plot for a better viewing of the formed shape, the user can move up and down with `W` and `S`, they can also rotate the graph with `A` and `D`.
 
 #### GIF Of The Program Execution
-![Execution GIF](https://i.imgur.com/ypcltRp.gif)
+![Execution GIF](https://i.imgur.com/d62B4Mg.gif)
 
 #### Note
 We may return to this project later to add watching the solid form.
