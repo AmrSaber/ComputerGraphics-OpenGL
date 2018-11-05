@@ -19,6 +19,8 @@ float Term::evalTrig(float x){
 	if (function == "atanh") return atanh(x);
 	
 	if (function == "exp") return exp(x);
+	if (function == "log") return log(x);
+	if (function == "log10") return log10(x);
 	
 	return 1;
 }

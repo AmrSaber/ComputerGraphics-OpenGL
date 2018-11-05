@@ -26,6 +26,11 @@ const float updateDelay = 50;
 bool controlRotateRight = 0, controlRotateLeft = 0;
 float controlYDistance = 0, controlRotationAngle = 0;
 bool rotateAboutX = 0, rotateAboutY = 0;
+
+bool buildingDone = false;
+float buildingAngle = 0;
+const float BUILDING_ANGLE_DELTA = 5;
+
 Exp expression;
 string input;
 
@@ -35,6 +40,7 @@ int main(int argc, char** argv) {
 	printf("Valid expressions are polynomials and trig functions with (x) inside of them..\n");
 	printf("Enter an expression to draw:\n");
 	getline(cin, input);
+	if (input == "" || input == "\n") input = "0";
 	expression.parse(input);
 
 	char inChar;
@@ -122,24 +128,27 @@ void handleResize(int w, int h) {
 
 //Called when a key is pressed
 void handleKeypress(unsigned char key, int x, int y) {
-	switch (key) {
-	case 27: //Escape key
+	if (key == 27){
 		exit(0);
-		break;
-	case 'a':
-		if (controlRotateRight) controlRotateRight = 0;
-		else controlRotateLeft = 1;
-		break;
-	case 'd':
-		if (controlRotateLeft) controlRotateLeft = 0;
-		else controlRotateRight = 1;
-		break;
-	case 'w':
-		controlYDistance += yShift;
-		break;
-	case 's':
-		controlYDistance -= yShift;
-		break;
+	}
+	
+	if (!buildingDone) return;
+	
+	switch (key) {
+		case 'a':
+			if (controlRotateRight) controlRotateRight = 0;
+			else controlRotateLeft = 1;
+			break;
+		case 'd':
+			if (controlRotateLeft) controlRotateLeft = 0;
+			else controlRotateRight = 1;
+			break;
+		case 'w':
+			controlYDistance += yShift;
+			break;
+		case 's':
+			controlYDistance -= yShift;
+			break;
 	}
 	
 }
@@ -175,7 +184,7 @@ void drawScene() {
 
 void drawCurve() {
 
-	for (float angle = 0; angle < 360; angle += 0.15) {
+	for (float angle = 0; angle < buildingAngle; angle += 0.15) {
 
 		float scaleFactor = 0.1;
 
@@ -197,6 +206,14 @@ void drawCurve() {
 		glEnd();
 
 		glPopMatrix();
+	}
+	
+	if (!buildingDone){
+		buildingAngle += BUILDING_ANGLE_DELTA;
+		if (buildingAngle >= 360){
+			buildingAngle = 360;
+			buildingDone = true;
+		}
 	}
 }
 
