@@ -1,6 +1,6 @@
 
-//#include "pch.h"
-//#include <iostream>
+//#include "pch.h"		// required by visual studio only
+#include <iostream>
 #include <GL/glut.h>
 #include <cmath>
 #include "imageloader.h"
@@ -77,11 +77,11 @@ void initRendering() {
 	Image* image = loadBMP("image_bg.bmp");
 	textureBg = loadTexture(image);
 	delete image;
-	
+
 	image = loadBMP("image_wood.bmp");
 	textureWood = loadTexture(image);
 	delete image;
-	
+
 	image = loadBMP("image_grandfather.bmp");
 	textureImage = loadTexture(image);
 	delete image;
@@ -92,24 +92,24 @@ void drawScene() {
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
-	gluLookAt(-5, -10, 50.0, -3.0, -5.0, 0.0, 0.0, 1.0, 0.0);
-	
+
+	gluLookAt(-10, -3, 50.0, 0, 0, 0, 0.0, 1.0, 0.0);
+
 	float amb = 0.6;
 	GLfloat ambientLight[] = { amb, amb, amb, 0.8f };
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambientLight);
-	
+
 	/*
 	//Add positioned light
-	GLfloat lightPos0[] = { 5.0f, 20.0f, zFront + 3.0f, 1.0f }; 
+	GLfloat lightPos0[] = { 5.0f, 20.0f, zFront + 3.0f, 1.0f };
 	GLfloat lightColor0[] = { 1, 1, 1, 1.0f };
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, lightColor0);
-	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0); 
+	glLightfv(GL_LIGHT0, GL_POSITION, lightPos0);
 	*/
-	
-	
+
+
 	//Specular light
-	GLfloat lightPos1[] = { 5.0f, 20.0f, zFront + 5.0f, 1.0f }; 
+	GLfloat lightPos1[] = { 5.0f, 20.0f, zFront + 5.0f, 1.0f };
 	GLfloat specularColor[] = { 1, 1, 1,1.0f };
 	glLightfv(GL_LIGHT1, GL_SPECULAR, specularColor);
 	glLightfv(GL_LIGHT1, GL_POSITION, lightPos1);
@@ -117,10 +117,10 @@ void drawScene() {
 	glMaterialfv(GL_FRONT, GL_SPECULAR, specularColor);
 	GLfloat shininess[] = { 100 };
 	glMaterialfv(GL_FRONT, GL_SHININESS, shininess);
-	
+
 
 	glEnable(GL_TEXTURE_2D);
-	
+
 	drawWindow();
 	drawBackground();
 	drawGrandfather();
@@ -130,142 +130,197 @@ void drawScene() {
 }
 
 void drawWindow() {
-	glActiveTexture(GL_TEXTURE0);
+	//glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureWood);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	
+
 	glPushMatrix();
-	
-	for (int i = 0 ; i < 6 ; ++i) {
-	
+
+	for (int i = 0; i < 6; ++i) {
+
 		glRotatef(2 * theta * 180 / PI, 0, 0, 1);
-		
+
 		// front
 		glBegin(GL_QUADS);
 
-			glTexCoord2f(0, 0);
-			glVertex3f(-dSmall, hSmall, zFront);
+		glTexCoord2f(0, 0);
+		glVertex3f(-dSmall, hSmall, zFront);
 
-			glTexCoord2f(0, 1);
-			glVertex3f(-dBig, hBig, zFront);
+		glTexCoord2f(0, 1);
+		glVertex3f(-dBig, hBig, zFront);
 
-			glTexCoord2f(1, 1);
-			glVertex3f(dBig, hBig, zFront);
+		glTexCoord2f(1, 1);
+		glVertex3f(dBig, hBig, zFront);
 
-			glTexCoord2f(1, 0);
-			glVertex3f(dSmall, hSmall, zFront);	
-			
-			glNormal3f(0, 0, 1); 		
+		glTexCoord2f(1, 0);
+		glVertex3f(dSmall, hSmall, zFront);
+
+		glNormal3f(0, 0, 1);
 
 		glEnd();
-		
+
 		// top
 		glBegin(GL_QUADS);
 
-			glTexCoord2f(0, 0);
-			glVertex3f(-dBig, hBig, zFront);
+		glTexCoord2f(0, 0);
+		glVertex3f(-dBig, hBig, zFront);
 
-			glTexCoord2f(0, 1);
-			glVertex3f(-dBig, hBig, zBack);
+		glTexCoord2f(0, 1);
+		glVertex3f(-dBig, hBig, zBack);
 
-			glTexCoord2f(1, 1);
-			glVertex3f(dBig, hBig, zBack);
+		glTexCoord2f(1, 1);
+		glVertex3f(dBig, hBig, zBack);
 
-			glTexCoord2f(1, 0);
-			glVertex3f(dBig, hBig, zFront);	
-			
-			glNormal3f(0, 1, 0); 	
+		glTexCoord2f(1, 0);
+		glVertex3f(dBig, hBig, zFront);
+
+		glNormal3f(0, 1, 0);
 
 		glEnd();
-		
+
 		// bottom
 		glBegin(GL_QUADS);
 
-			glTexCoord2f(0, 0);
-			glVertex3f(-dSmall, hSmall, zFront);
+		glTexCoord2f(0, 0);
+		glVertex3f(-dSmall, hSmall, zFront);
 
-			glTexCoord2f(0, 1);
-			glVertex3f(-dSmall, hSmall, zBack);
+		glTexCoord2f(0, 1);
+		glVertex3f(-dSmall, hSmall, zBack);
 
-			glTexCoord2f(1, 1);
-			glVertex3f(dSmall, hSmall, zBack);
+		glTexCoord2f(1, 1);
+		glVertex3f(dSmall, hSmall, zBack);
 
-			glTexCoord2f(1, 0);
-			glVertex3f(dSmall, hSmall, zFront);	
-			
-			glNormal3f(0, -1, 0); 	
+		glTexCoord2f(1, 0);
+		glVertex3f(dSmall, hSmall, zFront);
+
+		glNormal3f(0, -1, 0);
 
 		glEnd();
-		
+
 	}
-	
+
 	glPopMatrix();
-	
+
 }
 
 void drawBackground() {
 
-	glActiveTexture(GL_TEXTURE0);
+	//glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureBg);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	
+
 	float x = 100;
 	float y = 70;
 	float z = zBack;
 
 	glBegin(GL_QUADS);
 
-		glTexCoord2f(0, 0);
-		glVertex3f(-x, -y, z);
+	glTexCoord2f(0, 0);
+	glVertex3f(-x, -y, z);
 
-		glTexCoord2f(0, 1);
-		glVertex3f(-x, y, z);
+	glTexCoord2f(0, 1);
+	glVertex3f(-x, y, z);
 
-		glTexCoord2f(1, 1);
-		glVertex3f(x, y, z);
+	glTexCoord2f(1, 1);
+	glVertex3f(x, y, z);
 
-		glTexCoord2f(1, 0);
-		glVertex3f(x, -y, z);	
-		
-		glNormal3f(0, 0, 1); 	
+	glTexCoord2f(1, 0);
+	glVertex3f(x, -y, z);
+
+	glNormal3f(0, 0, 1);
 
 	glEnd();
-	
+
+
+	//first coulmn 
+	//glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textureWood);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	float x1 = 40;
+	float y1 = 70;
+	float zFro = 1;
+	float zBac = zBack;
+
+	glBegin(GL_QUADS);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(x1, y1, zFro);
+
+	glTexCoord2f(0, 1);
+	glVertex3f(x1+6, y1, zFro);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(x1+6, -y1, zFro);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(x1, -y1, zFro);
+
+	glNormal3f(0, 0, 1);
+
+	glEnd();
+
+
+
+	//second coulmn 
+
+	float x2 = -40;
+
+	glBegin(GL_QUADS);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(x2, y1, zFro);
+
+	glTexCoord2f(0, 1);
+	glVertex3f(x2 +6, y1, zFro);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(x2 +6, -y1, zFro);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(x2, -y1, zFro);
+
+	glNormal3f(0, 0, 1);
+
+	glEnd();
+
+
 }
 
 void drawGrandfather() {
 
-	glActiveTexture(GL_TEXTURE0);
+	//glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textureImage);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	
+
 	float z = zBack - (depth / 3.0f);
-	
+
 	glBegin(GL_POLYGON);
-		
-		glTexCoord2f(0.75, 1);
-		glVertex3f(dSmall, hSmall, z);
-		
-		glTexCoord2f(1, 0.5);
-		glVertex3f(2 * dSmall, 0, z);
-		
-		glTexCoord2f(0.75, 0);
-		glVertex3f(dSmall, -hSmall, z);
-		
-		glTexCoord2f(0.25, 0);
-		glVertex3f(-dSmall, -hSmall, z);
-		
-		glTexCoord2f(0, 0.5);
-		glVertex3f(-2 * dSmall, 0, z);
-		
-		glTexCoord2f(0.25, 1);
-		glVertex3f(-dSmall, hSmall, z);
-		
-		glNormal3f(0, 0, 1); 
-		
+
+	glTexCoord2f(0.75, 1);
+	glVertex3f(dSmall, hSmall, z);
+
+	glTexCoord2f(1, 0.5);
+	glVertex3f(2 * dSmall, 0, z);
+
+	glTexCoord2f(0.75, 0);
+	glVertex3f(dSmall, -hSmall, z);
+
+	glTexCoord2f(0.25, 0);
+	glVertex3f(-dSmall, -hSmall, z);
+
+	glTexCoord2f(0, 0.5);
+	glVertex3f(-2 * dSmall, 0, z);
+
+	glTexCoord2f(0.25, 1);
+	glVertex3f(-dSmall, hSmall, z);
+
+	glNormal3f(0, 0, 1);
+
 	glEnd();
 }
 
