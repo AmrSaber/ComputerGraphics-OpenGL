@@ -1,10 +1,12 @@
 #ifndef __EQUATION_PARSER
 #define __EQUATION_PARSER
 
-#include <math.h>
+#include <cmath>
 #include <vector>
 #include <algorithm>
 #include <sstream>
+#include <unordered_map>
+#include <unordered_set>
 
 using namespace std;
 
@@ -22,12 +24,15 @@ struct Term{
 class Exp{
 
 	private:		
-		vector<Term> terms;		
+		vector<Term> terms;
+		unordered_map<float, float> cache;
+		int _isEven = -1;
 		float string2number(string str);
 	
 	public:
 		void parse(string);
 		float eval(float);
+		bool isEven();
 		void print();
 		~Exp();
 };

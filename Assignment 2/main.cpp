@@ -1,9 +1,9 @@
+//#include "pch.h"		// required by visual studio only
 #include <iostream>
-#include <stdio.h>
 #include <cmath>
 #include <GL/glut.h>
+
 #include "Exp.h"
-#include "string"
 
 using namespace std;
 
@@ -29,6 +29,7 @@ bool rotateAboutX = false, rotateAboutY = false;
 
 bool buildingDone = false;
 float buildingAngle = 0;
+float finalBuildAngle = 360;
 const float BUILDING_ANGLE_DELTA = 5;
 
 Exp expression;
@@ -54,6 +55,7 @@ int main(int argc, char** argv) {
 		}
 		else if (inChar == 'y') {
 			rotateAboutY = 1;
+			if (expression.isEven()) finalBuildAngle = 180;
 			break;
 		}
 		printf("Invalid input, try again\n");
@@ -210,8 +212,8 @@ void drawCurve() {
 	
 	if (!buildingDone){
 		buildingAngle += BUILDING_ANGLE_DELTA;
-		if (buildingAngle >= 360){
-			buildingAngle = 360;
+		if (buildingAngle >= finalBuildAngle){
+			buildingAngle = finalBuildAngle;
 			buildingDone = true;
 			controlRotateRight = true;
 		}
@@ -222,26 +224,26 @@ void drawCurve() {
 void drawAxis() {
 	glBegin(GL_LINES);
 
-	// x
-	glPushMatrix();
-	glColor3f(0.0, 0.0, 1.0f);
-	glVertex3f(500.0, 0.0, 0.0);
-	glVertex3f(-500.0, 0.0, 0.0);
-	glPopMatrix();
+		// x
+		glPushMatrix();
+			glColor3f(0.0, 0.0, 1.0f);
+			glVertex3f(500.0, 0.0, 0.0);
+			glVertex3f(-500.0, 0.0, 0.0);
+		glPopMatrix();
 
-	// y
-	glPushMatrix();
-	glColor3f(1.0, 0.0, 0.0);
-	glVertex3f(0.0, -500.0, 0.0);
-	glVertex3f(0.0, 500.0, 0.0);
-	glPopMatrix();
+		// y
+		glPushMatrix();
+			glColor3f(1.0, 0.0, 0.0);
+			glVertex3f(0.0, -500.0, 0.0);
+			glVertex3f(0.0, 500.0, 0.0);
+		glPopMatrix();
 
-	// z
-	glPushMatrix();
-	glColor3f(0.0, 1.0, 0.0);
-	glVertex3f(0.0, 0.0, -500.0);
-	glVertex3f(0.0, 0.0, 500.0);
-	glPopMatrix();
+		// z
+		glPushMatrix();
+			glColor3f(0.0, 1.0, 0.0);
+			glVertex3f(0.0, 0.0, -500.0);
+			glVertex3f(0.0, 0.0, 500.0);
+		glPopMatrix();
 
 	glEnd();
 }

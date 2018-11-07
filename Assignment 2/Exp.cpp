@@ -42,22 +42,32 @@ Exp::~Exp(){
 }
 
 float Exp::eval(float x) {
+	x = round(x * 10000) / 10000.0f;
+	if (cache.count(x)) return cache[x];
+	
 	float y = 0;
 	for(Term term : terms) y += term.eval(x);
-	return y;
+	return cache[x] = y;
+}
+
+bool Exp::isEven() {
+	if(_isEven != -1) return _isEven;
+	
+	int count = 0;
+	unordered_set<float> ys;
+	
+	for (float x = -2 ; x - 2 < 1e-4 ; x += 0.2) {
+		if(abs(x) < 0.2) continue;
+		x = round(x * 100) / 100.0;
+		++count;
+		float y = round(this->eval(x) * 100) / 100.0f;
+		ys.insert(y);
+	}
+	
+	return (_isEven = (ys.size() == count/2));
 }
 
 float Exp::string2number(string str){
-	/*
-	int num = 0;
-	int place = 1;
-	reverse(str.begin(), str.end());
-	for (char d : str) {
-		num += (d - '0') * place;
-		place *= 10;
-	}
-	return num;
-	*/
 	stringstream ss(str);
 	float res;
 	ss >> res;
@@ -71,7 +81,7 @@ void Exp::print() {
 // accExpted syntax: [+/-]_[digit(s)]_[function: just x or trig function]_^_[digit(s)], _ == any number of spaces (0 or more)
 // syntax is split into 5 stages: from 0 to 4 searching for the above respectivly
 void Exp::parse(string expression) {
-	string errorMsg = "Expression syntax error";
+	string errorMsg = "\nExpression syntax error\n";
 	Term *term = new Term();
 	terms.clear();
 	
