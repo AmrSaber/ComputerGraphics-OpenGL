@@ -23,9 +23,9 @@ void renderbitmap(float x, float y, float z, void *font, string s);
 const float rotationDelta = 1;
 const float yShift = 0.01;
 const float updateDelay = 50;
-bool controlRotateRight = 0, controlRotateLeft = 0;
+bool controlRotateRight = false, controlRotateLeft = false;
 float controlYDistance = 0, controlRotationAngle = 0;
-bool rotateAboutX = 0, rotateAboutY = 0;
+bool rotateAboutX = false, rotateAboutY = false;
 
 bool buildingDone = false;
 float buildingAngle = 0;
@@ -199,7 +199,7 @@ void drawCurve() {
 		for (float x = -15; x <= 15; x += 0.5) {
 			float y = expression.eval(x);
 			if (abs(y) > 10) continue;
-			glNormal3f(x, y , 1.0f); 
+			glNormal3f(x, y , 1.0f);
 			glVertex3f(x, y, 0.0);
 		}
 
@@ -213,6 +213,7 @@ void drawCurve() {
 		if (buildingAngle >= 360){
 			buildingAngle = 360;
 			buildingDone = true;
+			controlRotateRight = true;
 		}
 	}
 }
