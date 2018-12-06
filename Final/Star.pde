@@ -1,31 +1,31 @@
 class Star{
   
-  int x,y;
-  float s;
-  color col = color(random(100,255));
+  private int x,y;
+  private float s;
+  private color clr = color(random(100,255));
   
-  int counterLimit = 100;
-  int counter = (int) random(0, counterLimit);
+  private int counterLimit = 100;
+  private int counter = (int) random(0, counterLimit);
   
-  Star(int x ,int y ,float s){
+  public Star(int x ,int y ,float s){
     this.x = x;
     this.y = y;
     this.s = s;
   }
   
   
-  void display() {
+  public void display() {
   
     counter++;
     if(counter == counterLimit){
       counter = 0;
-      col = color(random(100,255));
+      clr = color(random(100,255));
     }
     
     pushMatrix();
     translate(x, y, 2);
     
-    fill(col);
+    fill(clr);
     
     beginShape();
       vertex(0, -50, 0);

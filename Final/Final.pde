@@ -2,6 +2,7 @@
 
 Star[] stars;
 Grass[] grass; 
+Fly[] flies;
 ArrayList<Butterfly> butterflies;
 
 boolean isLooping = true;
@@ -23,17 +24,18 @@ void setup(){
   grass = new Grass[width];
   for (int i = 0 ; i < grass.length ; ++i) grass[i] = new Grass(40, i, height);
   
+  flies = new Fly[20];
+  for (int i = 0 ; i < flies.length ; ++i) flies[i] = new Fly(7 * height / 8);
+  
   butterflies = new ArrayList<Butterfly>();  
 }
 
 void draw(){
-  
-  resetMatrix();
-  camera();
    
   setGradient();
   for (int i = 0 ; i < stars.length ; ++i) stars[i].display();
   for (int i = 0 ; i < grass.length ; ++i) grass[i].display();  
+  for (int i = 0 ; i < flies.length ; ++i) flies[i].display();
   for (int i = 0 ; i < butterflies.size() ; ++i) butterflies.get(i).display();
   
   handleButterflies();
@@ -69,6 +71,7 @@ void handleButterflies(){
 }
 
 void keyPressed(){
+  if (key != ' ') return;
   if (isLooping) noLoop();
   else loop();
   isLooping = !isLooping;

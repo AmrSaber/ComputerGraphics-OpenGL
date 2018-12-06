@@ -1,21 +1,21 @@
 class Butterfly{
-  float x ,y0, y;
-  float dx = random(0.5, 2);
+  private float x ,y0, y;
+  private float dx = random(1, 2);
   
-  float freq = random(width/20, width/50);
-  float amp = random(10, 13); 
+  private float freq = random(width/20, width/50);
+  private float amp = random(10, 13); 
   
-  color col = color(random(256), random(256), random(256), 128);
+  private color col = color(random(256), random(256), random(256), 128);
   
-  float angle = PI/3;
-  float da = radians(20);
+  private float angle = PI/3;
+  private float da = radians(20);
   
-  Butterfly(){
+  public Butterfly(){
     x = -5;
     y0 = y = random(3*height/4, height - 40);
   }
   
-  void display(){
+  public void display(){
     
     update();
     
@@ -56,7 +56,7 @@ class Butterfly{
     popMatrix();
   }
   
-  void update(){
+  private void update(){
     angle += da;
     if (angle > PI/3 || angle < PI/6) da *= -1;
     
