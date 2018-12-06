@@ -1,8 +1,7 @@
-import java.util.ArrayList;
-
 class Butterfly{
   float x ,y0, y;
   float dx = random(0.5, 2);
+  
   float freq = random(width/20, width/50);
   float amp = random(10, 13); 
   
@@ -29,7 +28,6 @@ class Butterfly{
     stroke(255);
     strokeWeight(0.5);
     fill(col);
-    
     
     // left part
     pushMatrix();
@@ -63,7 +61,7 @@ class Butterfly{
     if (angle > PI/3 || angle < PI/6) da *= -1;
     
     x += dx;
-    y = this.y0 + amp * sin(2*PI*x/freq);// + random(-0.01, 0.01);
+    y = this.y0 + amp * sin(2*PI*x/freq);
   }
 
 }
