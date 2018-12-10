@@ -8,5 +8,8 @@ I will put screen shots of the finished assignments below so you have an idea of
 ### Assignment 2
 ![assignment 2 - solids of revolution](https://i.imgur.com/YyxaFzB.gif)
 
-### Assignment 3
+### Assignment 4 (I skipped 3 :"D)
 ![assignment 3 - scene from Mulan cartoon](https://i.imgur.com/JyN7BZ5.png)
+
+### Final Project
+![final project - natural cene](https://i.imgur.com/XDKJb1C.png)
