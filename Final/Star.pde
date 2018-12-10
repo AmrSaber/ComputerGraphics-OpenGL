@@ -2,7 +2,7 @@ class Star{
   
   private int x,y;
   private float s;
-  private color clr = color(random(100,255));
+  private color clr = color(random(50,255));
   
   private int counterLimit = 100;
   private int counter = (int) random(0, counterLimit);

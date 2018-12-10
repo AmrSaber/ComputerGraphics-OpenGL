@@ -23,7 +23,7 @@ class Fly{
     translate(x, y, 6);
     
     noStroke();
-    fill(255);
+    fill(color(255, 215, 0));
     ellipse(0, 0, size, size);
     
     popMatrix();

@@ -1,6 +1,7 @@
 class Grass{
   
-  private int gHeight, xTrans, yTrans;
+  private int xTrans, yTrans;
+  private float  gHeight;
   private final int segments = 8;
   
   private float angle = 0;
@@ -8,7 +9,7 @@ class Grass{
   
   private color grassColor;
   
-  public Grass(int height_, int xTrans_, int yTrans_){
+  public Grass(float height_, int xTrans_, int yTrans_){
     this.gHeight = height_;
     this.xTrans = xTrans_;
     this.yTrans = yTrans_;
@@ -28,7 +29,7 @@ class Grass{
     angle = radians(map(noise(t), 0, 1, -6, 6)); 
     t += 0.01;
     
-    int segLength = gHeight / segments;
+    float segLength = gHeight / segments;
     for (int i = 0 ; i < segments ; ++i){
       line(0, 0, 0, 0, -segLength, 0);
       translate(0, -segLength, 0);

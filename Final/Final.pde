@@ -4,6 +4,7 @@ Star[] stars;
 Grass[] grass; 
 Fly[] flies;
 ArrayList<Butterfly> butterflies;
+ArrayList<Meteor> meteors;
 
 boolean isLooping = true;
 //SoundFile soundFile;
@@ -22,12 +23,14 @@ void setup(){
   }
   
   grass = new Grass[width];
-  for (int i = 0 ; i < grass.length ; ++i) grass[i] = new Grass(40, i, height);
+  for (int i = 0 ; i < grass.length ; ++i) grass[i] = new Grass(random(35, 45), i, height);
   
   flies = new Fly[20];
   for (int i = 0 ; i < flies.length ; ++i) flies[i] = new Fly(7 * height / 8);
   
-  butterflies = new ArrayList<Butterfly>();  
+  butterflies = new ArrayList<Butterfly>();
+  
+  meteors = new ArrayList<Meteor>();
 }
 
 void draw(){
@@ -37,8 +40,10 @@ void draw(){
   for (int i = 0 ; i < grass.length ; ++i) grass[i].display();  
   for (int i = 0 ; i < flies.length ; ++i) flies[i].display();
   for (int i = 0 ; i < butterflies.size() ; ++i) butterflies.get(i).display();
+  for (int i = 0 ; i < meteors.size() ; ++i) meteors.get(i).display();
   
   handleButterflies();
+  handleMeteors();
 }
 
 void setGradient() {
@@ -67,6 +72,19 @@ void handleButterflies(){
   
   if (butterflies.size() < 1 || (random(1) < 0.005 && butterflies.size() < 10)) {
     butterflies.add(new Butterfly());
+  }
+}
+
+void handleMeteors(){
+  for (int i = 0 ; i < meteors.size() ; ++i) {
+    if (meteors.get(i).isGone) {
+      meteors.remove(i);
+      --i;
+    }
+  }
+  
+  if (random(1) < 0.0025 && meteors.size() < 5) {
+    meteors.add(new Meteor());
   }
 }
 
