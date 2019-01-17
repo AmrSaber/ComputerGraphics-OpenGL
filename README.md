@@ -13,3 +13,7 @@ I will put screen shots of the finished assignments below so you have an idea of
 
 ### Final Project
 ![final project - natural cene](https://i.imgur.com/XDKJb1C.png)
+
+### Bonus
+There is also a folder for 2 assignments requested in the lecture  
+(assignments were not requested in code, but I decided to implement them instead of doing the calculations manually)
